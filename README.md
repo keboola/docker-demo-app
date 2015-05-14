@@ -1,6 +1,6 @@
 # Keboola Docker Demo Application
 
-[![Build Status](https://travis-ci.org/keboola/docker-demo-app.svg?branch=master)](https://travis-ci.org/keboola/docker-demo-app) [![Code Climate](https://codeclimate.com/github/keboola/docker-demo-app/badges/gpa.svg)](https://codeclimate.com/github/keboola/docker-demo-app) [![Test Coverage](https://codeclimate.com/github/keboola/docker-demo-app/badges/coverage.svg)](https://codeclimate.com/github/keboola/docker-demo-app/coverage)
+[![Build Status](https://travis-ci.org/keboola/docker-demo-app.svg?branch=master)](https://travis-ci.org/keboola/docker-demo-app) [![Code Climate](https://codeclimate.com/github/keboola/docker-demo-app/badges/gpa.svg)](https://codeclimate.com/github/keboola/docker-demo-app) [![Test Coverage](https://codeclimate.com/github/keboola/docker-demo-app/badges/coverage.svg)](https://codeclimate.com/github/keboola/docker-demo-app/coverage) [![codecov.io](http://codecov.io/github/keboola/docker-demo-app/coverage.svg?branch=master)](http://codecov.io/github/keboola/docker-demo-app?branch=master)
 
 This is a working example of an application, that encapsulated in Docker works in KBC. 
 
