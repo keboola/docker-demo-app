@@ -50,11 +50,11 @@ class Splitter
         $header = fgetcsv($fhIn);
 
         if (!in_array($primaryKeyColumn, $header)) {
-            throw new Exception("Primary key column '{$primaryKeyColumn}' not found in file '{$source}'.");
+            throw new Exception("Primary key column '{$primaryKeyColumn}' not found.");
         }
 
         if (!in_array($textColumn, $header)) {
-            throw new Exception("Column '{$textColumn}' not found in file {'$source'}.");
+            throw new Exception("Column '{$textColumn}' not found.");
         }
 
         $primaryKeyColumnIndex = array_search($primaryKeyColumn, $header);
