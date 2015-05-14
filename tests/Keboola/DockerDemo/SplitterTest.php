@@ -104,5 +104,4 @@ EOF;
         $splitter = new Splitter();
         $splitter->processFile($sourceFile, $outputFile, "id", "someothercolumn", 15);
     }
-
 }
