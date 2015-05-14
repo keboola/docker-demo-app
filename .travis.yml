@@ -13,6 +13,8 @@ script:
   - phpunit --coverage-clover build/logs/clover.xml
 after_script:
   - vendor/bin/test-reporter
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
 notifications:
   slack: keboola:atHihCm3qSPtAy0EowLA5WjD
 addons:
