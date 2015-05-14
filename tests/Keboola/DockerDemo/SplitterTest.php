@@ -7,6 +7,20 @@ use Keboola\DockerDemo\Splitter\Exception;
 class SplitterTest extends \PHPUnit_Framework_TestCase
 {
 
+    protected function getSourceFile()
+    {
+        $sourceFile = sys_get_temp_dir() . "/" . uniqid("in");
+
+        $sourceFileContent = <<< EOF
+id,text,some_other_column
+1,"Short text","Whatever"
+2,"Long text Long text Long text","Something else"
+
+EOF;
+        file_put_contents($sourceFile, $sourceFileContent);
+        return $sourceFile;
+    }
+
     public function testSetRowNumberColumn()
     {
         $splitter = new Splitter();
@@ -22,18 +36,8 @@ class SplitterTest extends \PHPUnit_Framework_TestCase
 
     public function testProcess()
     {
-        $sourceFile = sys_get_temp_dir() . "/" . uniqid("in");
+        $sourceFile = $this->getSourceFile();
         $outputFile = sys_get_temp_dir() . "/" . uniqid("out");
-
-        $sourceFileContent = <<< EOF
-id,text,some_other_column
-1,"Short text","Whatever"
-2,"Long text Long text Long text","Something else"
-
-EOF;
-
-        file_put_contents($sourceFile, $sourceFileContent);
-
         $splitter = new Splitter();
         $result = $splitter->processFile($sourceFile, $outputFile, "id", "text", 15);
 
@@ -67,18 +71,8 @@ EOF2;
      */
     public function testPKNotFoundException()
     {
-        $sourceFile = sys_get_temp_dir() . "/" . uniqid("in");
+        $sourceFile = $this->getSourceFile();
         $outputFile = sys_get_temp_dir() . "/" . uniqid("out");
-
-        $sourceFileContent = <<< EOF
-id,text,some_other_column
-1,"Short text","Whatever"
-2,"Long text Long text Long text","Something else"
-
-EOF;
-
-        file_put_contents($sourceFile, $sourceFileContent);
-
         $splitter = new Splitter();
         $splitter->processFile($sourceFile, $outputFile, "someotherpk", "text", 15);
     }
@@ -89,18 +83,8 @@ EOF;
      */
     public function testColumnNotFoundException()
     {
-        $sourceFile = sys_get_temp_dir() . "/" . uniqid("in");
+        $sourceFile = $this->getSourceFile();
         $outputFile = sys_get_temp_dir() . "/" . uniqid("out");
-
-        $sourceFileContent = <<< EOF
-id,text,some_other_column
-1,"Short text","Whatever"
-2,"Long text Long text Long text","Something else"
-
-EOF;
-
-        file_put_contents($sourceFile, $sourceFileContent);
-
         $splitter = new Splitter();
         $splitter->processFile($sourceFile, $outputFile, "id", "someothercolumn", 15);
     }
