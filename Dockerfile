@@ -1,6 +1,6 @@
 FROM quay.io/keboola/base-php56
 
-ENV APP_VERSION 0.0.1
+ENV APP_VERSION 0.0.2
 
 WORKDIR /home
 
