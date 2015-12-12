@@ -6,10 +6,6 @@ This is a working example of an application which is encapsulated in a Docker im
 
 ## Docker install & run
 
-This is a working example of a Docker wrapped application in KBC.
-
-### Install & build
-
 ```
 git clone https://github.com/keboola/docker-demo-app.git
 cd docker-demo-app
