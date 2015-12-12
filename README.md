@@ -39,7 +39,6 @@ composer install
 phpunit
 ```
 
-
 ## Run 
 ```
 php ./src/run.php --data=/data
