@@ -2,8 +2,6 @@ language: php
 php:
 - 'hhvm'
 - '5.6'
-- '5.5'
-- '5.4'
 notifications:
   email: false
 install:
@@ -16,7 +14,7 @@ after_script:
 after_success:
   - bash <(curl -s https://codecov.io/bash)
 notifications:
-  slack: keboola:atHihCm3qSPtAy0EowLA5WjD
+  slack: keboola:fym2t4112jahUATYBYFS3oBS
 addons:
   code_climate:
     repo_token:
