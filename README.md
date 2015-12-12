@@ -6,7 +6,32 @@ This is a working example of an application, that encapsulated in Docker works i
 
 Functionality is simple, splits long text columns from a single table into multiple rows and adds index number into a new column and writes the result into `/data/out/tables/sliced.csv` file.
 
-## Install & build
+## Docker install & run
+
+This is a working example of a Docker wrapped application in KBC.
+
+### Install & build
+
+```
+git clone https://github.com/keboola/docker-demo-app.git
+cd docker-demo-app
+sudo docker build --no-cache -t keboola/docker-demo .
+```
+
+### Runing the container
+
+```
+sudo docker run \
+--volume=/home/ec2-user/data:/data \
+--memory=64m \
+--cpu-shares=1024 \
+--rm \
+keboola/docker-demo:latest 
+```
+
+Note: `--volume` needs to be adjusted accordingly and has to lead to a `data` directory. For the documentation what this folder has to comply with see [https://github.com/keboola/docker-bundle/blob/master/ENVIRONMENT.md#data-folder](https://github.com/keboola/docker-bundle/blob/master/ENVIRONMENT.md#data-folder).
+
+## Manual install & run
 
 ```
 git clone https://github.com/keboola/docker-demo-app.git
