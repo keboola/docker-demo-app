@@ -23,7 +23,7 @@ sudo docker run \
 keboola/docker-demo:latest 
 ```
 
-Note: `--volume` needs to be adjusted accordingly and has to lead to a `data` directory. For the documentation what this folder has to comply with see [https://github.com/keboola/docker-bundle/blob/master/ENVIRONMENT.md#data-folder](https://github.com/keboola/docker-bundle/blob/master/ENVIRONMENT.md#data-folder).
+Note: `--volume` needs to be adjusted accordingly and has to lead to a [`data` directory](http://developers.keboola.com/extend/common-interface/).
 
 ## Manual install & run
 
@@ -49,7 +49,7 @@ Where `/data` goes to your data folder.
 
 ## Data directory
 
-Data directory must follow conventions defined in [Keboola Docker Bundle repository](https://github.com/keboola/docker-bundle).
+Data directory must follow conventions defined in [documentation](http://developers.keboola.com/extend/common-interface/).
 
 
 ## Configuration
