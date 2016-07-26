@@ -5,8 +5,8 @@ WORKDIR /code
 COPY . /code/
 
 RUN apt-get update && apt-get install -y \
-  		git \ 
-   		unzip \
+        git \
+        unzip \
    --no-install-recommends && rm -r /var/lib/apt/lists/*
 
 RUN curl -sS https://getcomposer.org/installer | php \

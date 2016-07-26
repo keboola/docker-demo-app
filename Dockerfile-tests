@@ -3,4 +3,4 @@ FROM keboola/docker-demo-app
 RUN pecl install xdebug \
   && docker-php-ext-enable xdebug
 
-ENTRYPOINT /code/tests/tests.sh
+ENTRYPOINT /code/tests/run.sh
