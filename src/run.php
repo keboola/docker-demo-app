@@ -1,7 +1,5 @@
 <?php
 
-use Symfony\Component\Yaml\Yaml;
-
 require_once(dirname(__FILE__) . "/../vendor/autoload.php");
 
 $arguments = getopt("d::", array("data::"));
@@ -10,7 +8,7 @@ if (!isset($arguments["data"])) {
     exit(1);
 }
 
-$config = Yaml::parse(file_get_contents($arguments["data"] . "/config.yml"));
+$config = json_decode(file_get_contents($arguments["data"] . "/config.json"), true);
 
 if (isset($config["storage"]["input"]["tables"][0]["destination"])) {
     $sourceFile  = $config["storage"]["input"]["tables"][0]["destination"];

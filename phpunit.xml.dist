@@ -11,7 +11,15 @@
          bootstrap="bootstrap.php">
 
     <testsuite name="Docker Demo App Test">
-   		<directory>tests</directory>
-   	</testsuite>
+        <directory>tests</directory>
+    </testsuite>
 
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">.</directory>
+            <exclude>
+                <directory suffix=".php">vendor</directory>
+            </exclude>
+        </whitelist>
+    </filter>
 </phpunit>

@@ -1,9 +1,11 @@
-FROM quay.io/keboola/docker-base-php56
+FROM php:7
 
-WORKDIR /home
+WORKDIR /code
 
-# Initialize 
-COPY . /home/
-RUN composer install --no-interaction
+COPY . /code/
 
-ENTRYPOINT php ./src/run.php --data=/data
+RUN curl -sS https://getcomposer.org/installer | php \
+  && mv /code/composer.phar /usr/local/bin/composer \
+  && composer install
+
+ENTRYPOINT php /code/run.php --data=/data

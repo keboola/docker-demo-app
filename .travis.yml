@@ -1,21 +1,30 @@
-language: php
-php:
-- 'hhvm'
-- '5.6'
+sudo: required
+language: bash
+services:
+  - docker
+env:
+  DOCKER_COMPOSE_VERSION: 1.6.2
+before_install:
+  - sudo apt-get update
+  - sudo apt-get -o Dpkg::Options::="--force-confnew" -y install docker-engine
+install:
+  - sudo rm /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
+before_script:
+  - docker -v
+  - docker-compose -v
+  - docker-compose build demo-app
+script: docker-compose run --rm --entrypoint=/bin/sh demo-app ./tests.sh
+after_success:
+  - docker images
+deploy:
+  provider: script
+  skip_cleanup: true
+  script: ./deploy.sh
+  on:
+    tags: true
 notifications:
   email: false
-install:
-  - composer install --dev --no-scripts
-script:
-  - ./vendor/bin/phpcs --standard=psr2 --ignore=vendor -n .
-  - phpunit --coverage-clover build/logs/clover.xml
-after_script:
-  - vendor/bin/test-reporter
-after_success:
-  - bash <(curl -s https://codecov.io/bash)
-notifications:
   slack: keboola:fym2t4112jahUATYBYFS3oBS
-addons:
-  code_climate:
-    repo_token:
-      secure: "MsQUWSBgCzE3WLhBYyMfPGLe9TREn/M9TAItXIEY9MNOXFG3sJFk7z7mCnQfqCsJwtG7WAI6Ye4tLuO7Bs5GZgo5+ZfGiEWOb9kYgTpgjseHVwU2z1Tm7RP6fFh7kCf4O1ZEYRi/ocYuGhfxKtMau5LM3Z1tNA1e8kClsv1hs/Qwu7x0CxiqlPOenAuIUqcfL3ub3eETLiN3C5Jgo5pbzV3axYpxRylmg1UfgbFKxNOneSYRzoCYZCUEqmlLDwRowdQ990MAjG0iFP0qGn4DisCuFp/PtgSH44MeZMFpUSM1a+LgtELypkVWf3jX8r9ykZFR3ToZpD0//Yk5+vdvVKGd+gnrIA6P72NTkDMi3gEgDDrl9m2wW7GwJUveH+28OepDxS4g8UPcrMuACCV+BdwU8WWzq2SDgK206vANcHfc78oSOb7b8auybzehMG9qbQSAojihV0j18WmU1OVA786w7VqL/+FH9lCfNAx+n0DMoarMhmbOEo3E8emhzWewVUL4DRu8LhuAQkOKNgbU0ZKtWPYe9bj1LRfSAmHxkwTsXHy3DbWhrwygOJ936T1QVZfgv0rzmcQkIUJrnpvTHrdNZ+MuWX4OxWvFNs6xHNZNc7mlYayVlohV8ovGXaw1YR6xt3ZtJUgT+aRkchQqa3iXsCMsVZUmHYFJITBpAEc="

@@ -1,0 +1,10 @@
+version: '2'
+services:
+  demo-app:
+    build: .
+    image: keboola/docker-demo-app
+    tty: true
+    stdin_open: true
+    command: bash
+    volumes:
+      - ./:/code
