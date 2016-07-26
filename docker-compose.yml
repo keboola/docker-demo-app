@@ -1,6 +1,6 @@
 version: '2'
 services:
-  demo-app:
+  docker-demo-app:
     build: .
     image: keboola/docker-demo-app
     tty: true
@@ -9,7 +9,7 @@ services:
     volumes:
       - ./:/code
 
-  demo-app-tests:
+  docker-demo-app-tests:
     build:
       context: .
       dockerfile: Dockerfile-tests
