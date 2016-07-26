@@ -8,3 +8,9 @@ services:
     command: bash
     volumes:
       - ./:/code
+
+  demo-app-tests:
+    build:
+      context: .
+      dockerfile: Dockerfile-tests
+    command: /code/tests/run.sh

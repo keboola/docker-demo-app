@@ -15,7 +15,7 @@ install:
 before_script:
   - docker -v
   - docker-compose -v
-  - docker-compose build demo-app
+  - docker-compose build demo-app demo-app-tests
 script: docker-compose run --rm --entrypoint=/bin/sh demo-app ./tests.sh
 after_success:
   - docker images
