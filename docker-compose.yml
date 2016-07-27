@@ -16,3 +16,5 @@ services:
     volumes:
       - ./.git:/code/.git
     command: /code/tests/run.sh
+    environment:
+      - CODECLIMATE_REPO_TOKEN=$CODECLIMATE_REPO_TOKEN
