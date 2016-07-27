@@ -13,4 +13,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile-tests
+    volumes:
+      - ./.git:/code/.git
     command: /code/tests/run.sh
