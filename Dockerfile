@@ -14,4 +14,4 @@ RUN curl -sS https://getcomposer.org/installer | php \
   && mv /code/php.ini /usr/local/etc/php/php.ini \
   && composer install
 
-ENTRYPOINT php /code/run.php --data=/data
+ENTRYPOINT php /code/src/run.php --data=/data
