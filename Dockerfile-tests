@@ -1,13 +1,6 @@
 FROM keboola/docker-demo-app
 
 RUN pecl install xdebug \
-  && docker-php-ext-enable xdebug \
-  && chmod o+x /code/tests/run.sh \
-  && chmod o+x /code/vendor/bin/phpcs \
-  && chmod o+x /code/vendor/squizlabs/php_codesniffer/scripts/phpcs \
-  && chmod o+x /code/vendor/bin/phpunit \ 
-  && chmod o+x /code/vendor/phpunit/phpunit/phpunit \ 
-  && chmod o+x /code/vendor/bin/test-reporter \
-  && chmod o+x /code/vendor/codeclimate/php-test-reporter/composer/bin/test-reporter
+  && docker-php-ext-enable xdebug 
 
 ENTRYPOINT /code/tests/run.sh
