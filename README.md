@@ -56,38 +56,28 @@ Data directory must follow conventions defined in [documentation](http://develop
 
 The data folder must contain 
 
- - JSON configuration stored in `data/config.json`
+ - YAML configuration stored in `data/config.yml`
  - CSV file in `data/in/tables` 
 
 ### Sample configuration
-Mapped to `/data/config.json` 
+Mapped to `/data/config.yml` 
 
 ```
-{
-  "storage": {
-    "input": {
-      "tables": {
-        "0": {
-          "source": "in.c-main.yourtable",
-          "destination": "source.csv"
-        }
-      }
-    },
-    "output": {
-      "tables": {
-        "0": {
-          "source": "sliced.csv",
-          "destination": "out.c-main.yourtable"
-        }
-      }
-    }
-  },
-  "parameters": {
-    "primary_key_column": "id",
-    "data_column": "text",
-    "string_length": 255
-  }
-}
+storage:
+  input:
+    tables:
+      0:
+        source: in.c-main.yourtable
+        destination: source.csv
+  output:
+    tables:
+      0:
+        source: sliced.csv
+        destination: out.c-main.yourtable
+parameters:
+  primary_key_column: id
+  data_column: text
+  string_length: 255
 ```
 
  - `storage.input.tables[0].destination` (required): source table file
