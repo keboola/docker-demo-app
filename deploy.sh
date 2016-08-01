@@ -10,7 +10,7 @@ docker push quay.io/keboola/docker-demo-app:latest
 docker push quay.io/keboola/docker-demo-private:$TRAVIS_TAG
 docker push quay.io/keboola/docker-demo-private:latest
 
-docker login -u="$DOCKERHUB_USERNAME" -p="$DOCKERHUB_PASSWORD" index.docker.io
+docker login -u="$DOCKERHUB_USERNAME" -p="$DOCKERHUB_PASSWORD" https://index.docker.io/v1/
 docker tag keboola/docker-demo-app keboolaprivatetest/docker-demo-docker:$TRAVIS_TAG
 docker tag keboola/docker-demo-app keboolaprivatetest/docker-demo-docker:latest
 docker images
