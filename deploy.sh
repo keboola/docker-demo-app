@@ -31,9 +31,9 @@ docker push 147946154733.dkr.ecr.us-east-1.amazonaws.com/keboola/docker-demo-app
 
 # needs KBC_DEVELOPERPORTAL_USERNAME, KBC_DEVELOPERPORTAL_PASSWORD and KBC_DEVELOPERPORTAL_URL
 docker pull quay.io/keboola/developer-portal-cli-v2:0.0.1
-export REPOSITORY=`docker run --rm  -e KBC_DEVELOPERPORTAL_USERNAME=$KBC_DEVELOPERPORTAL_USERNAME -e KBC_DEVELOPERPORTAL_PASSWORD=$KBC_DEVELOPERPORTAL_PASSWORD -e KBC_DEVELOPERPORTAL_URL=$KBC_DEVELOPERPORTAL_URL quay.io/keboola/developer-portal-cli-v2:0.0.1 ecr:get-repository keboola docker-demo`
+export REPOSITORY=`docker run --rm  -e KBC_DEVELOPERPORTAL_USERNAME='$KBC_DEVELOPERPORTAL_USERNAME' -e KBC_DEVELOPERPORTAL_PASSWORD='$KBC_DEVELOPERPORTAL_PASSWORD' -e KBC_DEVELOPERPORTAL_URL='$KBC_DEVELOPERPORTAL_URL' quay.io/keboola/developer-portal-cli-v2:0.0.1 ecr:get-repository keboola docker-demo`
 docker tag keboola/docker-demo-app:latest $REPOSITORY:$TRAVIS_TAG
 docker tag keboola/docker-demo-app:latest $REPOSITORY:latest
-eval $(docker run --rm -e KBC_DEVELOPERPORTAL_USERNAME=$KBC_DEVELOPERPORTAL_USERNAME -e KBC_DEVELOPERPORTAL_PASSWORD=$KBC_DEVELOPERPORTAL_PASSWORD -e KBC_DEVELOPERPORTAL_URL=$KBC_DEVELOPERPORTAL_URL quay.io/keboola/developer-portal-cli-v2:0.0.1 ecr:get-login keboola docker-demo)
+eval $(docker run --rm -e KBC_DEVELOPERPORTAL_USERNAME='$KBC_DEVELOPERPORTAL_USERNAME' -e KBC_DEVELOPERPORTAL_PASSWORD='$KBC_DEVELOPERPORTAL_PASSWORD' -e KBC_DEVELOPERPORTAL_URL='$KBC_DEVELOPERPORTAL_URL' quay.io/keboola/developer-portal-cli-v2:0.0.1 ecr:get-login keboola docker-demo)
 docker push $REPOSITORY:$TRAVIS_TAG
 docker push $REPOSITORY:latest
