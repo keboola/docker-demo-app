@@ -38,5 +38,5 @@ eval $(docker run --rm -e KBC_DEVELOPERPORTAL_USERNAME=$KBC_DEVELOPERPORTAL_USER
 docker push $REPOSITORY:$TRAVIS_TAG
 docker push $REPOSITORY:latest
 
-# Deploy to KBC ->update tag to current in Keboola Developer Portal
+# Deploy to KBC -> update tag to current in Keboola Developer Portal
 docker run --rm -e KBC_DEVELOPERPORTAL_USERNAME=$KBC_DEVELOPERPORTAL_USERNAME -e KBC_DEVELOPERPORTAL_PASSWORD=$KBC_DEVELOPERPORTAL_PASSWORD -e KBC_DEVELOPERPORTAL_URL=$KBC_DEVELOPERPORTAL_URL quay.io/keboola/developer-portal-cli-v2:latest update-app-repository keboola docker-demo $TRAVIS_TAG
