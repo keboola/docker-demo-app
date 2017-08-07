@@ -1,18 +1,18 @@
 #!/bin/bash
 docker login -u="$QUAY_USERNAME" -p="$QUAY_PASSWORD" quay.io
-docker tag keboola/docker-demo-app quay.io/keboola/docker-demo-app:$TRAVIS_TAG
-docker tag keboola/docker-demo-app quay.io/keboola/docker-demo-app:latest
-docker tag keboola/docker-demo-app quay.io/keboola/docker-demo-private:$TRAVIS_TAG
-docker tag keboola/docker-demo-app quay.io/keboola/docker-demo-private:latest
+docker tag $KBC_APP_REPOSITORY quay.io/$KBC_APP_REPOSITORY:$TRAVIS_TAG
+docker tag $KBC_APP_REPOSITORY quay.io/$KBC_APP_REPOSITORY:latest
+docker tag $KBC_APP_REPOSITORY quay.io/keboola/docker-demo-private:$TRAVIS_TAG
+docker tag $KBC_APP_REPOSITORY quay.io/keboola/docker-demo-private:latest
 docker images
-docker push quay.io/keboola/docker-demo-app:$TRAVIS_TAG
-docker push quay.io/keboola/docker-demo-app:latest
+docker push quay.io/$KBC_APP_REPOSITORY:$TRAVIS_TAG
+docker push quay.io/$KBC_APP_REPOSITORY:latest
 docker push quay.io/keboola/docker-demo-private:$TRAVIS_TAG
 docker push quay.io/keboola/docker-demo-private:latest
 
 docker login -u="$DOCKERHUB_USERNAME" -p="$DOCKERHUB_PASSWORD" https://index.docker.io/v1/
-docker tag keboola/docker-demo-app keboolaprivatetest/docker-demo-docker:$TRAVIS_TAG
-docker tag keboola/docker-demo-app keboolaprivatetest/docker-demo-docker:latest
+docker tag $KBC_APP_REPOSITORY keboolaprivatetest/docker-demo-docker:$TRAVIS_TAG
+docker tag $KBC_APP_REPOSITORY keboolaprivatetest/docker-demo-docker:latest
 docker images
 docker push keboolaprivatetest/docker-demo-docker:$TRAVIS_TAG
 docker push keboolaprivatetest/docker-demo-docker:latest
@@ -24,18 +24,18 @@ pip install --user awscli
 export PATH=$PATH:$HOME/.local/bin
 # needs AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY envvars
 eval $(aws ecr get-login --region us-east-1)
-docker tag keboola/docker-demo-app:latest 147946154733.dkr.ecr.us-east-1.amazonaws.com/keboola/docker-demo-app:$TRAVIS_TAG
-docker tag keboola/docker-demo-app:latest 147946154733.dkr.ecr.us-east-1.amazonaws.com/keboola/docker-demo-app:latest
-docker push 147946154733.dkr.ecr.us-east-1.amazonaws.com/keboola/docker-demo-app:$TRAVIS_TAG
-docker push 147946154733.dkr.ecr.us-east-1.amazonaws.com/keboola/docker-demo-app:latest
+docker tag $KBC_APP_REPOSITORY:latest 147946154733.dkr.ecr.us-east-1.amazonaws.com/$KBC_APP_REPOSITORY:$TRAVIS_TAG
+docker tag $KBC_APP_REPOSITORY:latest 147946154733.dkr.ecr.us-east-1.amazonaws.com/$KBC_APP_REPOSITORY:latest
+docker push 147946154733.dkr.ecr.us-east-1.amazonaws.com/$KBC_APP_REPOSITORY:$TRAVIS_TAG
+docker push 147946154733.dkr.ecr.us-east-1.amazonaws.com/$KBC_APP_REPOSITORY:latest
 
 # needs KBC_DEVELOPERPORTAL_USERNAME, KBC_DEVELOPERPORTAL_PASSWORD and KBC_DEVELOPERPORTAL_URL
 docker pull quay.io/keboola/developer-portal-cli-v2:latest
 export REPOSITORY=`docker run --rm  \
     -e KBC_DEVELOPERPORTAL_USERNAME -e KBC_DEVELOPERPORTAL_PASSWORD -e KBC_DEVELOPERPORTAL_URL \
     quay.io/keboola/developer-portal-cli-v2:latest ecr:get-repository $KBC_DEVELOPERPORTAL_VENDOR $KBC_DEVELOPERPORTAL_APP`
-docker tag keboola/docker-demo-app:latest $REPOSITORY:$TRAVIS_TAG
-docker tag keboola/docker-demo-app:latest $REPOSITORY:latest
+docker tag $KBC_APP_REPOSITORY:latest $REPOSITORY:$TRAVIS_TAG
+docker tag $KBC_APP_REPOSITORY:latest $REPOSITORY:latest
 eval $(docker run --rm
     -e KBC_DEVELOPERPORTAL_USERNAME -e KBC_DEVELOPERPORTAL_PASSWORD -e KBC_DEVELOPERPORTAL_URL \
     quay.io/keboola/developer-portal-cli-v2:latest ecr:get-login $KBC_DEVELOPERPORTAL_VENDOR $KBC_DEVELOPERPORTAL_APP)
