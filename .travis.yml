@@ -6,9 +6,9 @@ before_script:
   - docker -v
   - docker-compose -v
   - docker-compose build docker-demo-app docker-demo-app-tests
-script:
   # Run tests
   - docker-compose run --rm -e "CODECLIMATE_REPO_TOKEN=$CODECLIMATE_REPO_TOKEN" docker-demo-app-tests
+script:
   # push master image to ECR
   # env requires: KBC_DEVELOPERPORTAL_USERNAME, KBC_DEVELOPERPORTAL_PASSWORD & KBC_DEVELOPERPORTAL_URL,
   # KBC_DEVELOPERPORTAL_APP and KBC_DEVELOPERPORTAL_VENDOR
