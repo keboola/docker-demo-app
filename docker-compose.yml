@@ -5,7 +5,6 @@ services:
     image: keboola/docker-demo-app
     tty: true
     stdin_open: true
-    command: bash
 
   tests:
     image: keboola/docker-demo-app
@@ -17,6 +16,7 @@ services:
     image: keboola/docker-demo-app
     volumes:
       - ./:/code
+    command: /bin/bash
 
   xdebug:
     image: keboola/docker-demo-app-xdebug
