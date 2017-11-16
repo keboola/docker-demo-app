@@ -27,7 +27,7 @@ docker-compose run --rm tests
 docker-compose run dev composer install
 ```
 
-### Coding Style Checker
+### Code Style Checker
 ```
 docker-compose run --rm dev /code/vendor/bin/phpcs --standard=psr2 -n --ignore=vendor --extensions=php .
 ```
