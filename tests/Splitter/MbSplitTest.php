@@ -3,8 +3,9 @@
 namespace Keboola\DockerDemo\Tests\Splitter;
 
 use Keboola\DockerDemo\Splitter\MbSplit;
+use PHPUnit\Framework\TestCase;
 
-class MbSplitTest extends \PHPUnit_Framework_TestCase
+class MbSplitTest extends TestCase
 {
 
     public function testSimpleSplit()

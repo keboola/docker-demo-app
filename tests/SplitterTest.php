@@ -4,8 +4,9 @@ namespace Keboola\DockerDemo\Tests;
 
 use Keboola\DockerDemo\Splitter;
 use Keboola\DockerDemo\Splitter\Exception;
+use PHPUnit\Framework\TestCase;
 
-class SplitterTest extends \PHPUnit_Framework_TestCase
+class SplitterTest extends TestCase
 {
 
     protected function getSourceFile()
