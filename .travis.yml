@@ -5,10 +5,13 @@ services:
 before_script:
   - docker -v
   - docker-compose -v
-  - docker-compose build docker-demo-app docker-demo-app-tests
-  # Run tests
-  - docker-compose run --rm -e "CODECLIMATE_REPO_TOKEN=$CODECLIMATE_REPO_TOKEN" docker-demo-app-tests
+  - docker-compose build
+  - docker-compose run --rm dev /code/vendor/bin/phpcs --standard=psr2 -n --ignore=vendor --extensions=php .
+  - docker-compose run --rm dev /code/vendor/bin/phpstan analyse --level=7 ./src ./tests
 script:
+  - docker-compose run --rm tests
+  - docker-compose run --rm xdebug /code/vendor/bin/phpunit --coverage-clover build/logs/clover.xml
+  - docker-compose run --rm xdebug /code/vendor/bin/test-reporter
   # push test image to ECR
   # env requires: KBC_DEVELOPERPORTAL_USERNAME, KBC_DEVELOPERPORTAL_PASSWORD & KBC_DEVELOPERPORTAL_URL,
   # KBC_DEVELOPERPORTAL_APP and KBC_DEVELOPERPORTAL_VENDOR

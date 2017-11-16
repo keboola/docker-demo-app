@@ -6,13 +6,22 @@ services:
     tty: true
     stdin_open: true
     command: bash
+
+  tests:
+    image: keboola/docker-demo-app
+    volumes:
+      - ./:/code
+    entrypoint: /code/vendor/bin/phpunit
+
+  dev:
+    image: keboola/docker-demo-app
     volumes:
       - ./:/code
 
-  docker-demo-app-tests:
+  xdebug:
+    image: keboola/docker-demo-app-xdebug
     build:
       context: .
-      dockerfile: Dockerfile-tests
-    volumes:
-      - ./.git:/code/.git
-    command: /code/tests/run.sh
+      dockerfile: docker/xdebug/Dockerfile
+    environment:
+      - CODECLIMATE_REPO_TOKEN

@@ -4,53 +4,47 @@
 
 This is a working example of an application which is encapsulated in a Docker image and is integrated with KBC. Application functionality is simple, it splits long text columns from a single table into multiple rows and adds index number into a new column and writes the result into `/data/out/tables/sliced.csv` file.
 
-## Docker install & run
+## Development
+ 
+Clone this repository and init the workspace with following command:
 
 ```
-git clone https://github.com/keboola/docker-demo-app.git
+git clone https://github.com/keboola/docker-demo-app
 cd docker-demo-app
-sudo docker build --no-cache -t keboola/docker-demo .
+docker-compose build
+docker-compose run --rm dev composer install
 ```
 
-### Runing the container
+Run the test suite using this command:
 
 ```
-sudo docker run \
---volume=/home/ec2-user/data:/data \
---memory=64m \
---cpu-shares=1024 \
---rm \
-keboola/docker-demo:latest 
+docker-compose run --rm tests
+```
+
+### Composer
+
+```
+docker-compose run dev composer install
+```
+
+### Coding Style Checker
+```
+docker-compose run --rm dev /code/vendor/bin/phpcs --standard=psr2 -n --ignore=vendor --extensions=php .
+```
+
+### PHP Static Code Analysis
+
+```
+docker-compose run --rm dev /code/vendor/bin/phpstan analyse --level=7 ./src ./tests
+```
+
+### Running the container (via docker-compose)
+
+```
+docker-compose run --rm --volume /my-data-dir:/data docker-demo-app
 ```
 
 Note: `--volume` needs to be adjusted accordingly and has to lead to a [`data` directory](http://developers.keboola.com/extend/common-interface/).
-
-## Manual install & run
-
-```
-git clone https://github.com/keboola/docker-demo-app.git
-cd docker-demo-app
-composer install
-```
-
-## Test
-
-```
-phpunit
-```
-
-## Run 
-```
-php ./src/run.php --data=/data
-```
-
-Where `/data` goes to your data folder.
-
-
-## Data directory
-
-Data directory must follow conventions defined in [documentation](http://developers.keboola.com/extend/common-interface/).
-
 
 ## Configuration
 
@@ -62,24 +56,24 @@ The data folder must contain
 ### Sample configuration
 Mapped to `/data/config.json` 
 
-```
+```json
 {
   "storage": {
     "input": {
-      "tables": {
-        "0": {
+      "tables": [
+        {
           "source": "in.c-main.yourtable",
           "destination": "source.csv"
         }
-      }
+      ]
     },
     "output": {
-      "tables": {
-        "0": {
+      "tables": [
+        {
           "source": "sliced.csv",
           "destination": "out.c-main.yourtable"
         }
-      }
+      ]
     }
   },
   "parameters": {
