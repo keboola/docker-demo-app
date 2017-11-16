@@ -1,7 +1,8 @@
 <?php
 
-namespace Keboola\DockerDemo;
+namespace Keboola\DockerDemo\Tests;
 
+use Keboola\DockerDemo\Splitter;
 use Keboola\DockerDemo\Splitter\Exception;
 
 class SplitterTest extends \PHPUnit_Framework_TestCase

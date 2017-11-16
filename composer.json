@@ -14,7 +14,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Keboola\\": "src/Keboola/"
+            "Keboola\\DockerDemo\\": "src/",
+            "Keboola\\DockerDemo\\Tests\\": "tests/"
         }
     }
 }

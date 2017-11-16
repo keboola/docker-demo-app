@@ -4,5 +4,6 @@ php --version \
     && composer --version \
     && composer install \
     && /code/vendor/bin/phpcs --standard=psr2 -n --ignore=vendor --extensions=php . \
+    && /code/vendor/bin/phpstan analyse --level=7 ./src ./tests \
     && /code/vendor/bin/phpunit --coverage-clover build/logs/clover.xml \
     && /code/vendor/bin/test-reporter
