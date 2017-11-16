@@ -23,5 +23,7 @@ services:
     build:
       context: .
       dockerfile: docker/xdebug/Dockerfile
+    volumes:
+      - ./:/code
     environment:
       - CODECLIMATE_REPO_TOKEN
