@@ -38,7 +38,7 @@ docker-compose run --rm dev /code/vendor/bin/phpcs --standard=psr2 -n --ignore=v
 docker-compose run --rm dev /code/vendor/bin/phpstan analyse --level=7 ./src ./tests
 ```
 
-### Running the container (via docker-compose)
+### Running the container
 
 ```
 docker-compose run --rm --volume /my-data-dir:/data docker-demo-app
