@@ -4,53 +4,79 @@
 
 This is a working example of an application which is encapsulated in a Docker image and is integrated with KBC. Application functionality is simple, it splits long text columns from a single table into multiple rows and adds index number into a new column and writes the result into `/data/out/tables/sliced.csv` file.
 
-## Docker install & run
+## Development
+ 
+Clone this repository and init the workspace with following command:
 
 ```
-git clone https://github.com/keboola/docker-demo-app.git
+git clone https://github.com/keboola/docker-demo-app
 cd docker-demo-app
-sudo docker build --no-cache -t keboola/docker-demo .
+docker-compose build
+docker-compose run --rm dev composer install
 ```
 
-### Runing the container
+Run the test suite using this command:
 
 ```
-sudo docker run \
---volume=/home/ec2-user/data:/data \
---memory=64m \
---cpu-shares=1024 \
---rm \
-keboola/docker-demo:latest 
+docker-compose run --rm tests
+```
+
+### Composer
+
+```
+docker-compose run dev composer install
+```
+
+### Code Style Checker
+```
+docker-compose run --rm dev /code/vendor/bin/phpcs --standard=psr2 -n --ignore=vendor --extensions=php .
+```
+
+### PHP Static Code Analysis
+
+```
+docker-compose run --rm dev /code/vendor/bin/phpstan analyse --level=7 ./src ./tests
+```
+
+### Running the container (via docker-compose)
+
+```
+docker-compose run --rm --volume /my-data-dir:/data docker-demo-app
 ```
 
 Note: `--volume` needs to be adjusted accordingly and has to lead to a [`data` directory](http://developers.keboola.com/extend/common-interface/).
 
-## Manual install & run
+### Debugging (using Xdebug and PHPStorm)
+
+#### Environment variables
+
+Create a `.env` file with these variable and replace required values
 
 ```
-git clone https://github.com/keboola/docker-demo-app.git
-cd docker-demo-app
-composer install
+XDEBUG_CONFIG=remote_host=docker.for.mac.localhost remote_port=9000
+PHP_IDE_CONFIG=serverName=docker-demo-app
 ```
+##### remote_host
 
-## Test
+ - The default value `docker.for.mac.localhost` can be used with Docker for Mac 17.06 and newer
+ - Older Docker for Mac versions can use `cat ~/Library/Containers/com.docker.docker/Data/database/com.docker.driver.amd64-linux/slirp/host`
+ - For dlite use `ifconfig` and find the network interface linked to your dlite install (eg. `bridge100`), default is `192.168.64.1` 
+
+#### PHPStorm
+
+In **Languages & Framewoks > PHP** add a new **CLI Interpreter** with the **Docker Compose** option.
+
+![New CLI Interpreter](./docs/phpstorm-cli-interpreter.png)
+
+In **Languages & Framewoks > PHP > Debug** check the following settings in **Xdebug** part.
+
+![Debug](./docs/phpstorm-debug.png)
+
+#### Running
 
 ```
-phpunit
+docker-compose run --rm --volume /my-data-dir:/data xdebug php run.php
 ```
-
-## Run 
-```
-php ./src/run.php --data=/data
-```
-
-Where `/data` goes to your data folder.
-
-
-## Data directory
-
-Data directory must follow conventions defined in [documentation](http://developers.keboola.com/extend/common-interface/).
-
 
 ## Configuration
 
@@ -62,24 +88,24 @@ The data folder must contain
 ### Sample configuration
 Mapped to `/data/config.json` 
 
-```
+```json
 {
   "storage": {
     "input": {
-      "tables": {
-        "0": {
+      "tables": [
+        {
           "source": "in.c-main.yourtable",
           "destination": "source.csv"
         }
-      }
+      ]
     },
     "output": {
-      "tables": {
-        "0": {
+      "tables": [
+        {
           "source": "sliced.csv",
           "destination": "out.c-main.yourtable"
         }
-      }
+      ]
     }
   },
   "parameters": {

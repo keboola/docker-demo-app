@@ -4,16 +4,15 @@
     "type": "project",
     "require": {
         "php": "^7.0",
-        "symfony/yaml": "~2.6.3"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^5.4",
+        "phpunit/phpunit": "^6.0",
         "codeclimate/php-test-reporter": "dev-master",
-        "squizlabs/php_codesniffer": "^2.6"
+        "squizlabs/php_codesniffer": "^2.6",
+        "phpstan/phpstan": "^0.8"
     },
     "autoload": {
         "psr-4": {
-            "Keboola\\": "src/Keboola/"
+            "Keboola\\DockerDemo\\": "src/",
+            "Keboola\\DockerDemo\\Tests\\": "tests/"
         }
     }
 }

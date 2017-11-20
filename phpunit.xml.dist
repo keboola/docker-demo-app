@@ -18,7 +18,7 @@
         <whitelist processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">.</directory>
             <exclude>
-                <file>src/run.php</file>
+                <file>run.php</file>
                 <directory suffix=".php">vendor</directory>
             </exclude>
         </whitelist>
