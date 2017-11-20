@@ -46,7 +46,7 @@ docker-compose run --rm --volume /my-data-dir:/data docker-demo-app
 
 Note: `--volume` needs to be adjusted accordingly and has to lead to a [`data` directory](http://developers.keboola.com/extend/common-interface/).
 
-### Debugging (via xdebug and PHPStorm)
+### Debugging (using Xdebug and PHPStorm)
 
 #### Environment variables
 
