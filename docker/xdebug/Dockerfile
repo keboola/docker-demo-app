@@ -15,5 +15,6 @@ RUN pecl install xdebug \
 
 COPY . /code/
 COPY ./docker/php/php.ini /usr/local/etc/php/php.ini
+COPY ./docker/xdebug/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 
 RUN composer install

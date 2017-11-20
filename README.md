@@ -46,6 +46,38 @@ docker-compose run --rm --volume /my-data-dir:/data docker-demo-app
 
 Note: `--volume` needs to be adjusted accordingly and has to lead to a [`data` directory](http://developers.keboola.com/extend/common-interface/).
 
+### Debugging (via xdebug and PHPStorm)
+
+#### Environment variables
+
+Create a `.env` file with these variable and replace required values
+
+```
+XDEBUG_CONFIG=remote_host=docker.for.mac.localhost remote_port=9000
+PHP_IDE_CONFIG=serverName=docker-demo-app
+```
+##### remote_host
+
+ - The default value `docker.for.mac.localhost` can be used with Docker for Mac 17.06 and newer
+ - Older Docker for Mac versions can use `cat ~/Library/Containers/com.docker.docker/Data/database/com.docker.driver.amd64-linux/slirp/host`
+ - For dlite use `ifconfig` and find the network interface linked to your dlite install (eg. `bridge100`), default is `192.168.64.1` 
+
+#### PHPStorm
+
+In **Languages & Framewoks > PHP** add a new **CLI Interpreter** with the **Docker Compose** option.
+
+![New CLI Interpreter](./docs/phpstorm-cli-interpreter.png)
+
+In **Languages & Framewoks > PHP > Debug** check the following settings in **Xdebug** part.
+
+![Debug](./docs/phpstorm-debug.png)
+
+#### Running
+
+```
+docker-compose run --rm --volume /my-data-dir:/data xdebug php run.php
+```
+
 ## Configuration
 
 The data folder must contain 
