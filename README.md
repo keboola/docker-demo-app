@@ -64,13 +64,17 @@ PHP_IDE_CONFIG=serverName=docker-demo-app
 
 #### PHPStorm
 
-In **Languages & Framewoks > PHP** add a new **CLI Interpreter** with the **Docker Compose** option.
+In **Preferences > Languages & Framewoks > PHP** add a new **CLI Interpreter** with the **Docker Compose** option.
 
 ![New CLI Interpreter](./docs/phpstorm-cli-interpreter.png)
 
-In **Languages & Framewoks > PHP > Debug** check the following settings in **Xdebug** part.
+In **Preferences > Languages & Framewoks > PHP > Debug** check the following settings in **Xdebug** part.
 
 ![Debug](./docs/phpstorm-debug.png)
+
+In **Preferences > Languages & Framewoks > PHP > Servers** add a new server that matches the `serverName` name and add a mapping from the project root to `/code`.
+
+![Mapping](./docs/phpstorm-mapping.png)
 
 #### Running
 
