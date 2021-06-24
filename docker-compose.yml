@@ -24,6 +24,8 @@ services:
     image: keboola/docker-demo-app-xdebug
     build:
       context: .
+      args:
+        IMAGE: keboola/docker-demo-app 
       dockerfile: docker/xdebug/Dockerfile
     volumes:
       - ./:/code
@@ -33,3 +35,4 @@ services:
       - CODECLIMATE_REPO_TOKEN
       - PHP_IDE_CONFIG
       - XDEBUG_CONFIG
+      - PHP_IDE_CONFIG=serverName=component
