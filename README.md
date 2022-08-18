@@ -150,3 +150,7 @@ id,text,row_number
 2,"text Long Text",1
 
 ```
+
+## License
+
+MIT licensed, see [LICENSE](./LICENSE) file.
